@@ -1,33 +1,21 @@
 '''
-This program gives you a translation of I love you in a vareity of languages.
+Once you have run first_step.py, run this file everyday to get 
+one translation of 'I love you' which you have not used before.
 
 Author: Sahra Ghalebikesabi
 '''
 
-
-# packages
-from bs4 import BeautifulSoup
-import requests
-import pandas as pd
-from pprint import pprint
-
-# read in web page
-link = r"http://www.aeppelsche-homepage.de/liebe.htm"
-f = requests.get(link)
-
-# replace <br> for preserving linebreaks
-replaced_br = f.text.replace('<br>', 'newtransl') 
-
-# read in tables into data frames
-dfs = pd.read_html(replaced_br)
-
-# merge data frames
-frames = dfs[2:]
-langs_table = pd.concat(frames)
-langs_table.reindex(list(range(len(langs_table))))
-
-# create dictionary
-langs_dict = langs_table.to_dict()
+import pickle 
 
 
-# drop if column 1 is na (Deutsche Dialekte)
+with open('data/a_loveu_everyday.pkl', 'rb') as file:
+    a_loveu_everyday = pickle.load(file)
+
+loveU_of_today = a_loveu_everyday.pop(0)
+print(loveU_of_today)
+
+with open('data/langs_time.txt', 'a') as file:
+    file.write(loveU_of_today[0])
+
+with open('data/a_loveu_everyday.pkl', 'wb') as file:
+    pickle.dump(a_loveu_everyday, file, protocol=pickle.HIGHEST_PROTOCOL)
