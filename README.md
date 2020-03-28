@@ -1,6 +1,6 @@
 # I love you everyday
 
-This repository will give you a love statement in a different language every day and create a timely ordered list of the languages used so far.
+This repository will give you a love statement in a different language everyday and create a timely ordered list of the languages used so far.
 
 The first time you run the program modify the data/langs_time.txt file such that it contains a list of languages you already know how to say 'I love you' in. After that run 
 ```
